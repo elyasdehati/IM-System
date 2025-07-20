@@ -1,6 +1,8 @@
 @extends('admin.admin_master')
 @section('admin')
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
 <div class="content">
 
                     <!-- Start Content-->
@@ -54,60 +56,57 @@
                         </div>
 
                         <div class="card-body">
+
+                        <form action="{{ route('profile.store') }}" method="post" enctype="multipart/form-data">
+
+                            @csrf
+
                             <div class="form-group mb-3 row">
-                                <label class="form-label">First Name</label>
+                                <label class="form-label">Name</label>
                                 <div class="col-lg-12 col-xl-12">
-                                    <input class="form-control" type="text" value="Charles">
+                                    <input class="form-control" type="text" name="name" value="{{ $profileData->name }}">
                                 </div>
                             </div>
 
                             <div class="form-group mb-3 row">
-                                <label class="form-label">Last Name</label>
+                                <label class="form-label">Email</label>
                                 <div class="col-lg-12 col-xl-12">
-                                    <input class="form-control" type="text" value="Buncle">
+                                    <input class="form-control" type="email" name="email" value="{{ $profileData->email }}">
                                 </div>
                             </div>
 
                             <div class="form-group mb-3 row">
-                                <label class="form-label">Contact Phone</label>
+                                <label class="form-label">Phone</label>
                                 <div class="col-lg-12 col-xl-12">
-                                    <div class="input-group">
-                                        <span class="input-group-text"><i class="mdi mdi-phone-outline"></i></span>
-                                        <input class="form-control" type="text" placeholder="Phone" aria-describedby="basic-addon1" value="+61 399615">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group mb-3 row">
-                                <label class="form-label">Email Address</label>
-                                <div class="col-lg-12 col-xl-12">
-                                    <div class="input-group">
-                                        <span class="input-group-text"><i class="mdi mdi-email"></i></span>
-                                        <input type="text" class="form-control" value="CharlesBuncle@dayrep.com" placeholder="Email" aria-describedby="basic-addon1">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group mb-3 row">
-                                <label class="form-label">Company</label>
-                                <div class="col-lg-12 col-xl-12">
-                                    <input class="form-control" type="text" value="zoyothemes">
-                                </div>
-                            </div>
-
-                            <div class="form-group mb-3 row">
-                                <label class="form-label">City</label>
-                                <div class="col-lg-12 col-xl-12">
-                                    <input class="form-control" type="text" value="Adelaide">
+                                    <input class="form-control" type="number" name="phone" value="{{ $profileData->phone }}">
                                 </div>
                             </div>
 
                             <div class="form-group mb-3 row">
                                 <label class="form-label">Address</label>
                                 <div class="col-lg-12 col-xl-12">
-                                    <input class="form-control" type="text" value="Australia">
+                                   <textarea name="address" class="form-control" placeholder="Add Your Address">{{ $profileData->address }}</textarea>
                                 </div>
                             </div>
+
+                            <div class="form-group mb-3 row">
+                                <label class="form-label">Profile Image</label>
+                                <div class="col-lg-12 col-xl-12">
+                                    <input class="form-control" type="file" name="photo" id="image">
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-3 row">
+                                <label class="form-label"></label>
+                                <div class="col-lg-12 col-xl-12">
+                                    <img id="showImage" src="{{ (!empty($profileData->photo)) ? url('upload/user_images/'.$profileData->photo) : url('upload/no_image.jpg') }}" class="rounded-circle avatar-xl img-thumbnail float-start" alt="image profile">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12 col-xl-12">
+                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                            </div>
+                        </form>
 
                         </div><!--end card-body-->
                     </div>
@@ -168,4 +167,18 @@
                     <!-- container-fluid -->
                 </div> 
 
+
+<script type="text/javascript">
+
+    $(document).ready(function(){
+        $('#image').change(function(e){
+            var reader = new FileReader();
+            reader.onload = function(e){
+                $('#showImage').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(e.target.files['0']); 
+        })
+    })
+
+</script>
 @endsection
