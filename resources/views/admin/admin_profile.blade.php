@@ -124,32 +124,48 @@
                         </div>
 
                         <div class="card-body mb-0">
-                            <div class="form-group mb-3 row">
-                                <label class="form-label">Old Password</label>
-                                <div class="col-lg-12 col-xl-12">
-                                    <input class="form-control" type="password" placeholder="Old Password">
-                                </div>
-                            </div>
-                            <div class="form-group mb-3 row">
-                                <label class="form-label">New Password</label>
-                                <div class="col-lg-12 col-xl-12">
-                                    <input class="form-control" type="password" placeholder="New Password">
-                                </div>
-                            </div>
-                            <div class="form-group mb-3 row">
-                                <label class="form-label">Confirm Password</label>
-                                <div class="col-lg-12 col-xl-12">
-                                    <input class="form-control" type="password" placeholder="Confirm Password">
-                                </div>
-                            </div>
 
-                            <div class="form-group row">
-                                <div class="col-lg-12 col-xl-12">
-                                    <button type="submit" class="btn btn-primary">Change Password</button>
-                                    <button type="button" class="btn btn-danger">Cancel</button>
-                                </div>
-                            </div>
+        <form action="{{ route('admin.password.update') }}" method="post" enctype="multipart/form-data">
 
+            @csrf
+
+            <div class="form-group mb-3 row">
+                <label class="form-label">Old Password</label>
+                <div class="col-lg-12 col-xl-12">
+                    <input class="form-control @error('old_password') is_invalid                        
+                    @enderror" name="old_password" type="password" id="old_password" placeholder="Old Password">
+                    @error('old_password')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+            </div>
+
+            <div class="form-group mb-3 row">
+                <label class="form-label">New Password</label>
+                <div class="col-lg-12 col-xl-12">
+                    <input class="form-control @error('old_password') is_invalid                        
+                    @enderror" name="new_password" type="password" id="new_password" placeholder="Old Password">
+                    @error('new_password')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+            </div>
+
+            <div class="form-group mb-3 row">
+                <label class="form-label">Confirm Password</label>
+                <div class="col-lg-12 col-xl-12">
+                    <input class="form-control" name="new_password_confirmation" type="password" placeholder="New Password Confirmation" id="new_password_confirmation">
+                    
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-lg-12 col-xl-12">
+                    <button type="submit" class="btn btn-primary">Change Password</button>
+                    <button type="button" class="btn btn-danger">Cancel</button>
+                </div>
+            </div>
+        </form>                
                         </div><!--end card-body-->
                     </div>
                 </div>
