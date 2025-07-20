@@ -20,10 +20,9 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
+// Logout should be outside of middleware
+Route::get('/admin/logout', [AdminController::class, 'AdminLogout'])->name('admin.logout');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/admin/logout', [AdminController::class, 'AdminLogout'])->name('admin.logout');
-
-
-
+    Route::get('/admin/profile', [AdminController::class, 'AdminProfile'])->name('admin.profile');
 });
