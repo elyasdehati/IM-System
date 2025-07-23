@@ -91,6 +91,7 @@
 
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script> 
         <script src="{{ asset('backend/assets/js/code.js') }}"></script>
+        <script src="{{ asset('backend/assets/js/validate.min.js') }}"></script>
 
          <!-- Datatables js -->
         <script src="{{ asset('backend/assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
