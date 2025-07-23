@@ -8,12 +8,12 @@
 
                         <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
                             <div class="flex-grow-1">
-                                <h4 class="fs-18 fw-semibold m-0">All Brands</h4>
+                                <h4 class="fs-18 fw-semibold m-0">All WareHouse</h4>
                             </div>
             
                             <div class="text-end">
                                 <ol class="breadcrumb m-0 py-0">
-                                    <a href="{{ route('add.brand') }}" class="btn btn-secondary">Add Brand</a>
+                                    <a href="{{ route('add.warehouse') }}" class="btn btn-secondary">Add Warehouse</a>
                                 </ol>
                             </div>
                         </div>
@@ -32,20 +32,24 @@
                     <thead>
                     <tr>
                         <th>SI</th>
-                        <th>Brand Name</th>
-                        <th>Image</th>
+                        <th>WareHouse Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>City</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach ($brand as $key=> $item)
+                        @foreach ($warehouse as $key=> $item)
                             <tr>
                                 <td>{{ $key+1 }}</td>
                                 <td>{{ $item->name }}</td>
-                                <td> <img src="{{ asset($item->image) }}" alt="" style="width:70px; height: 40px"> </td>
+                                <td>{{ $item->email }}</td>
+                                <td>{{ $item->phone }}</td>
+                                <td>{{ $item->city }}</td>
                                 <td>
-                                    <a href="{{ route('edit.brand', $item->id) }}" class="btn btn-success btn-sm">Edit</a>
-                                    <a href="{{ route('delete.brand', $item->id) }}" id="delete" class="btn btn-danger btn-sm">Delete</a>
+                                    <a href="{{ route('edit.warehouse', $item->id) }}" class="btn btn-success btn-sm">Edit</a>
+                                    <a href="{{ route('delete.warehouse', $item->id) }}" id="delete" class="btn btn-danger btn-sm">Delete</a>
                                 </td>
                             </tr>
                         @endforeach
