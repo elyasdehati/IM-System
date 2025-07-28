@@ -86,12 +86,14 @@
         <!-- Widgets Init Js -->
         <script src="{{ asset('backend/assets/js/pages/analytics-dashboard.init.js') }}"></script>
 
+        <script src="{{ asset('backend/assets/js/code.js') }}"></script>
+        <script src="{{ asset('backend/assets/js/custome.js') }}"></script>
+        <script src="{{ asset('backend/assets/js/validate.min.js') }}"></script>
+
         <!-- App js-->
         <script src="{{ asset('backend/assets/js/app.js') }}"></script>
 
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script> 
-        <script src="{{ asset('backend/assets/js/code.js') }}"></script>
-        <script src="{{ asset('backend/assets/js/validate.min.js') }}"></script>
 
          <!-- Datatables js -->
         <script src="{{ asset('backend/assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>

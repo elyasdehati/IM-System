@@ -13,7 +13,7 @@
             
                             <div class="text-end">
                                 <ol class="breadcrumb m-0 py-0">
-                                    <a href="{{ route('add.product') }}" class="btn btn-secondary">Add Purchase</a>
+                                    <a href="{{ route('add.purchase') }}" class="btn btn-secondary">Add Purchase</a>
                                 </ol>
                             </div>
                         </div>
@@ -48,7 +48,7 @@
         <td>{{ $item->status }}</td>
         <td>${{ $item->grand_total }}</td>
         <td>Cash</td>
-        <td>{{  \Carbon\Carbon::parse($item->created_at)->format('Y-m-d') }}</td>
+        <td>{{  \Carbon\Carbon::parse($item->created_at)->format('Y-m-ds') }}</td>
         <td>
             <a title="Details" href="{{ route('details.product', $item->id) }}" class="btn btn-info btn-sm"><span class="mdi mdi-eye-circle mdi-18px"></span></a>
             <a title="Edit" href="{{ route('edit.product', $item->id) }}" class="btn btn-success btn-sm"><span class="mdi mdi-book-edit mdi-18px"></span></a>
