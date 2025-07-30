@@ -12,7 +12,7 @@
 
  <div class="card">
     <div class="card-body">
-    <form action=" " method="post" enctype="multipart/form-data">
+    <form action="{{ route('store.purchase') }}" method="post" enctype="multipart/form-data">
        @csrf
 
 
@@ -105,15 +105,15 @@
                 <tbody>
                    <tr>
                       <td class="py-3">Discount</td>
-                      <td class="py-3" id="displayDiscount">TK 0.00</td>
+                      <td class="py-3" id="displayDiscount">AFN 0.00</td>
                    </tr>
                    <tr>
                       <td class="py-3">Shipping</td>
-                      <td class="py-3" id="shippingDisplay">TK 0.00</td>
+                      <td class="py-3" id="shippingDisplay">AFN 0.00</td>
                    </tr>
                    <tr>
                       <td class="py-3 text-primary">Grand Total</td>
-                      <td class="py-3 text-primary" id="grandTotal">TK 0.00</td>
+                      <td class="py-3 text-primary" id="grandTotal">AFN 0.00</td>
                       <input type="hidden" name="grand_total">
                    </tr>      
                    
@@ -133,7 +133,7 @@
                    </tr>
                    <tr class="d-none">
                       <td class="py-3">Due Amount</td>
-                      <td class="py-3" id="dueAmount">TK 0.00</td>
+                      <td class="py-3" id="dueAmount">AFN 0.00</td>
                       <input type="hidden" name="due_amount">
                    </tr>
               
@@ -161,7 +161,7 @@
                <label class="form-label" for="formBasic">Status : <span class="text-danger">*</span></label>
                <select name="status" id="status" class="form-control form-select">
                   <option value="">Select Status</option>
-                  <option value="Received">Received</option>
+                  <option value="Recieved">Recieved</option>
                   <option value="Pending">Pending</option>
                   <option value="Ordered">Ordered</option>
                </select>
