@@ -99,6 +99,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/edit/purchase/{id}','EditPurchase')->name('edit.purchase');
         Route::post('/update/purchase/{id}','UpdatePurchase')->name('update.purchase');
         Route::get('/details/purchase/{id}','DetailsPurchase')->name('details.purchase');
+        Route::get('/invoice/purchase/{id}','InvoicePurchase')->name('invoice.purchase');
     });
 
 });
