@@ -97,6 +97,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/purchase/product','PurchaseProductSearch')->name('purchase.product.search');
         Route::post('/store/purchase','StorePurchase')->name('store.purchase');
         Route::get('/edit/purchase/{id}','EditPurchase')->name('edit.purchase');
+        Route::post('/update/purchase/{id}','UpdatePurchase')->name('update.purchase');
     });
 
 });

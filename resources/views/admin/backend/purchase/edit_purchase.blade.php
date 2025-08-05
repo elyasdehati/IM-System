@@ -12,7 +12,7 @@
 
  <div class="card">
     <div class="card-body">
-    <form action="{{ route('store.purchase') }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('update.purchase', $editData->id) }}" method="post" enctype="multipart/form-data">
        @csrf
 
 
@@ -27,6 +27,8 @@
              <span class="text-danger">{{ $message }}</span>
              @enderror
           </div>
+
+         <input type="hidden" name="warehouse_id" value="{{ $editData->warehouse_id }}">
 
           <div class="col-md-4 mb-3">
                 <div class="form-group w-100">
@@ -44,15 +46,12 @@
           <div class="col-md-4 mb-3">
              <div class="form-group w-100">
                 <label class="form-label" for="formBasic">Supplier : <span class="text-danger">*</span></label>
-                <select name="supplier_id" id="supplier_id" class="form-control form-select" disabled>
+                <select name="supplier_id" id="supplier_id" class="form-control form-select">
                    <option value="">Select Supplier</option>
                    @foreach ($suppliers as $item)
                    <option value="{{ $item->id }}" {{ $editData->supplier_id == $item->id ? 'selected' : '' }}>{{ $item->name }}</option>
                    @endforeach
                 </select>
-                @error('supplier_id')
-                <span class="text-danger">{{ $message }}</span>
-                @enderror
              </div>
           </div>
        </div>
@@ -160,7 +159,7 @@
                    <tr>
                       <td class="py-3 text-primary">Grand Total</td>
                       <td class="py-3 text-primary" id="grandTotal">AFN {{ $editData->grand_total }}</td>
-                      <input type="hidden" name="grand_total">
+                      <input type="hidden" name="grand_total" value="{{ $editData->grand_total }}">
                    </tr>      
                    
                
@@ -227,9 +226,9 @@
 </div>
 
      <div class="col-xl-12">
-        <div class="d-flex mt-5 justify-content-end">
+        <div class="d-flex mt-5 justify-content-end"href="{{ route('all.purchase') }}">
            <button class="btn btn-primary me-3" type="submit">Save</button>
-           <a class="btn btn-secondary" href="{{ route('all.purchase') }}">Cancel</a>
+           <a class="btn btn-secondary" >Cancel</a>
         </div>
      </div>
   </div>
