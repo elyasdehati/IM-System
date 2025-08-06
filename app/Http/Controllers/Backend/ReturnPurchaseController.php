@@ -96,4 +96,10 @@ class ReturnPurchaseController extends Controller
 
     }
     // End Method
+
+    public function DetailsReturnPurchase($id) {
+        $purchase = ReturnPurchase::with(['supplier','purchaseItem.product'])->find($id);
+        return view('admin.backend.return-purchase.return_purchase_details',compact('purchase'));
+    }
+    // End Method
 }
