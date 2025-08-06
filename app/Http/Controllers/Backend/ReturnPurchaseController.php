@@ -102,4 +102,11 @@ class ReturnPurchaseController extends Controller
         return view('admin.backend.return-purchase.return_purchase_details',compact('purchase'));
     }
     // End Method
+
+     public function InvoiceReturnPurchase($id) {
+        $purchase = ReturnPurchase::with(['supplier', 'warehouse','purchaseItem.product'])->find($id);
+        $pdf = Pdf::loadView('admin.backend.return-purchase.invoice_pdf', compact('purchase'));
+        return $pdf->download('purchase_'.$id.'.pdf');
+    }
+    // End Method
 }
