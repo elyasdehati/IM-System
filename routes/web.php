@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\SupplierController;
 use App\Http\Controllers\Backend\WareHouseController;
 use App\Http\Controllers\Backend\PurchaseController;
 use App\Http\Controllers\Backend\ReturnPurchaseController;
+use App\Http\Controllers\Backend\SaleController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -113,6 +114,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/edit/return/purchase/{id}','EditReturnPurchase')->name('edit.return.purchase');
         Route::post('/update/return/purchase/{id}','UpdateReturnPurchase')->name('update.return.purchase');
         Route::get('/delete/return/purchase/{id}','DeleteReturnPurchase')->name('delete.return.purchase');
+    });
+
+    Route::controller(SaleController::class)->group(function() {
+        Route::get('/all/sale','AllSales')->name('all.sale');
     });
 
 });
