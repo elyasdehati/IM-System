@@ -215,4 +215,14 @@ class SaleReturnController extends Controller
         return $pdf->download('return_sales_'.$id.'.pdf');
     }
     // End Method
+
+    //////// Due Sale And Due Return Sale Manage Methods ////////
+    public function DueSale(){
+        $sales = Sale::with(['customer','warehouse'])
+            ->select('id','customer_id','warehouse_id','due_amount')
+            ->where('due_amount', '>', 0)
+            ->get();
+        return view('admin.backend.due.sale_due',compact('sales'));
+    }
+    // End Method
 }

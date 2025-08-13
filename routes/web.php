@@ -139,4 +139,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/invoice/sale/return/{id}', 'InvoiceSalesReturn')->name('invoice.sale.return');
     });
 
+    Route::controller(SaleReturnController::class)->group(function() {
+        Route::get('/due/sale','DueSale')->name('due.sale');
+    });
+
 });
