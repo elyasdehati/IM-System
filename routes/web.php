@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\WareHouseController;
 use App\Http\Controllers\Backend\PurchaseController;
 use App\Http\Controllers\Backend\ReturnPurchaseController;
 use App\Http\Controllers\Backend\SaleController;
+use App\Http\Controllers\Backend\SaleReturnController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -125,6 +126,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/delete/sale/{id}', 'DeleteSales')->name('delete.sale');
         Route::get('/details/sale/{id}', 'DetailsSales')->name('details.sale');
         Route::get('/invoice/sale/{id}', 'InvoiceSales')->name('invoice.sale');
+    });
+
+    Route::controller(SaleReturnController::class)->group(function() {
+        Route::get('/all/sale/return','AllSalesReturn')->name('all.sale.return');
     });
 
 });
