@@ -131,12 +131,12 @@
                          <input type="text" name="full_paid" id="fullPaidInput">
                       </td>
                    </tr>
+                   
                    <tr>
                       <td class="py-3">Due Amount</td>
                       <td class="py-3" id="dueAmount">AFN 0.00</td>
                       <input type="hidden" name="due_amount">
                    </tr>
-              
 
                 </tbody>
              </table>

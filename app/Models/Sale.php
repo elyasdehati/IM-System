@@ -13,7 +13,7 @@ class Sale extends Model
     }
 
     public function warehouse(){
-        return $this->belongsTo(warehouse::class, 'warehouse_id');
+        return $this->belongsTo(WareHouse::class, 'warehouse_id');
     }
 
     public function saleItem(){
