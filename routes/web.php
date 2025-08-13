@@ -124,6 +124,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/update/sale/{id}', 'UpdateSales')->name('update.sale');
         Route::get('/delete/sale/{id}', 'DeleteSales')->name('delete.sale');
         Route::get('/details/sale/{id}', 'DetailsSales')->name('details.sale');
+        Route::get('/invoice/sale/{id}', 'InvoiceSales')->name('invoice.sale');
     });
 
 });

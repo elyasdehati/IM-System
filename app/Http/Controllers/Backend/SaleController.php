@@ -197,4 +197,12 @@ class SaleController extends Controller
         return view('admin.backend.sales.sales_details',compact('sales'));
     }
     // End Method
+
+    public function InvoiceSales($id){
+        $sales = Sale::with(['customer','warehouse','saleItem.product'])->find($id);
+
+        $pdf = Pdf::loadView('admin.backend.sales.invoice_pdf',compact('sales'));
+        return $pdf->download('sales_'.$id.'.pdf');
+    }
+    // End Method
 }
