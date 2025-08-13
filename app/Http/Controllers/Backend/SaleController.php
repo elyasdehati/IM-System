@@ -191,4 +191,10 @@ class SaleController extends Controller
           }  
     }
     // End Method
+
+    public function DetailsSales($id){
+        $sales = Sale::with(['customer','saleItem.product'])->find($id);
+        return view('admin.backend.sales.sales_details',compact('sales'));
+    }
+    // End Method
 }
