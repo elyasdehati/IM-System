@@ -167,6 +167,21 @@
                                     </ul>
                                 </div>
                             </li>
+
+                            <li>
+                                <a href="#Transfer" data-bs-toggle="collapse">
+                                    <i data-feather="alert-octagon"></i>
+                                    <span> Transfer Setup </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse" id="Transfer">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="{{ route('all.transfer') }}" class="tp-link">Transfers</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
                            
                             <li class="menu-title mt-2">General</li>
 

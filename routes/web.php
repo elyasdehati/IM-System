@@ -9,6 +9,7 @@ use App\Http\Controllers\Backend\PurchaseController;
 use App\Http\Controllers\Backend\ReturnPurchaseController;
 use App\Http\Controllers\Backend\SaleController;
 use App\Http\Controllers\Backend\SaleReturnController;
+use App\Http\Controllers\Backend\TransferConrtoller;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -142,6 +143,10 @@ Route::middleware('auth')->group(function () {
     Route::controller(SaleReturnController::class)->group(function() {
         Route::get('/due/sale','DueSale')->name('due.sale');
         Route::get('/due/sale/return', 'DueSaleReturn')->name('due.sale.return');
+    });
+
+    Route::controller(TransferConrtoller::class)->group(function() {
+        Route::get('/all/transfer','Transfer')->name('all.transfer');
     });
 
 });
