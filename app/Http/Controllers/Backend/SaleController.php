@@ -110,32 +110,43 @@ class SaleController extends Controller
     }
     // End Method
 
-    public function UpdateSales(Request $request, $id){
+    public function UpdateSales(Request $request, $id)
+{
+    $request->validate([
+        'date' => 'required|date',
+        'status' => 'required', 
+    ]);
 
-        $request->validate([
-            'date' => 'required|date',
-            'status' => 'required', 
-        ]);
+    $sales = Sale::findOrFail($id);
+    $sales->update([
+        'date' => $request->date,
+        'warehouse_id' => $request->warehouse_id,
+        'customer_id' => $request->customer_id,
+        'discount' => $request->discount ?? 0,
+        'shipping' => $request->shipping ?? 0,
+        'status' => $request->status,
+        'note' => $request->note,
+        'grand_total' => $request->grand_total,
+        'paid_amount' => $request->paid_amount,
+        'due_amount' => $request->due_amount,
+        'full_paid' => $request->full_paid,   
+    ]);
 
-        $sales = Sale::findOrFail($id);
-        $sales->update([
-            'date' => $request->date,
-            'warehouse_id' => $request->warehouse_id,
-            'customer_id' => $request->customer_id,
-            'discount' => $request->discount ?? 0,
-            'shipping' => $request->shipping ?? 0,
-            'status' => $request->status,
-            'note' => $request->note,
-            'grand_total' => $request->grand_total,
-            'paid_amount' => $request->paid_amount,
-            'due_amount' => $request->due_amount,
-            'full_paid' => $request->full_paid,   
-        ]);
+    // برگرداندن موجودی قبلی قبل از حذف آیتم‌ها
+    $oldItems = SaleItem::where('sale_id', $sales->id)->get();
+    foreach ($oldItems as $old) {
+        $product = Product::find($old->product_id);
+        if ($product) {
+            $product->product_qty += $old->quantity; // چون فروش بوده، باید دوباره به انبار اضافه بشه
+            $product->save();
+        }
+    }
 
-    // Delete old sales item
-    SaleItem::where('sale_id',$sales->id)->delete();
+    // حذف آیتم‌های قبلی
+    SaleItem::where('sale_id', $sales->id)->delete();
 
-    foreach($request->products as $product_id => $product){
+    // افزودن آیتم‌های جدید و کاهش موجودی
+    foreach ($request->products as $product_id => $product) {
         SaleItem::create([
             'sale_id' => $sales->id,
             'product_id' => $product_id,
@@ -146,11 +157,9 @@ class SaleController extends Controller
             'subtotal' => $product['subtotal'],  
         ]);
 
-        /// Update Product Stock
-
         $productModel = Product::find($product_id);
         if ($productModel) {
-            $productModel->product_qty += $product['quantity'];
+            $productModel->product_qty -= $product['quantity']; // چون فروش هست باید کم بشه
             $productModel->save();
         }  
     }
@@ -158,10 +167,13 @@ class SaleController extends Controller
     $notification = array(
         'message' => 'Sale Updated Successfully',
         'alert-type' => 'success'
-     ); 
-     return redirect()->route('all.sale')->with($notification);  
-    }
-    // End Method 
+    ); 
+
+    return redirect()->route('all.sale')->with($notification);  
+}
+
+
+
 
     public function DeleteSales($id){
         try {

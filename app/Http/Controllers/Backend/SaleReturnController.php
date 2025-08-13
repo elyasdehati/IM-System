@@ -99,4 +99,80 @@ class SaleReturnController extends Controller
       } 
     }
     // End Method
+
+    public function EditSalesReturn($id){
+        $editData = SaleReturn::with('saleReturnItems.product')->findOrFail($id);
+        $customers = Customer::all();
+        $warehouses = WareHouse::all();
+        return view('admin.backend.return-sale.edit_return_sales',compact('editData','customers','warehouses'));
+    }
+    // End Method 
+
+    
+
+    public function UpdateSalesReturn(Request $request, $id)
+{
+    $request->validate([
+        'date' => 'required|date',
+        'status' => 'required', 
+    ]);
+
+    $sales = SaleReturn::findOrFail($id);
+    $sales->update([
+        'date' => $request->date,
+        'warehouse_id' => $request->warehouse_id,
+        'customer_id' => $request->customer_id,
+        'discount' => $request->discount ?? 0,
+        'shipping' => $request->shipping ?? 0,
+        'status' => $request->status,
+        'note' => $request->note,
+        'grand_total' => $request->grand_total,
+        'paid_amount' => $request->paid_amount,
+        'due_amount' => $request->due_amount,
+        'full_paid' => $request->full_paid,   
+    ]);
+
+    // برگرداندن موجودی قبلی قبل از حذف آیتم‌ها
+    $oldItems = SaleReturnItem::where('sale_return_id', $sales->id)->get();
+    foreach ($oldItems as $old) {
+        $product = Product::find($old->product_id);
+        if ($product) {
+            $product->product_qty -= $old->quantity; // کم کردن موجودی برگشتی قبلی
+            $product->save();
+        }
+    }
+
+    // حذف آیتم‌های قبلی
+    SaleReturnItem::where('sale_return_id', $sales->id)->delete();
+
+    // افزودن آیتم‌های جدید
+    foreach ($request->products as $product_id => $product) {
+        SaleReturnItem::create([
+            'sale_return_id' => $sales->id,
+            'product_id' => $product_id,
+            'net_unit_cost' => $product['net_unit_cost'],
+            'stock' => $product['stock'],
+            'quantity' => $product['quantity'],
+            'discount' => $product['discount'] ?? 0,
+            'subtotal' => $product['subtotal'],  
+        ]);
+
+        // به‌روزرسانی موجودی با مقدار جدید
+        $productModel = Product::find($product_id);
+        if ($productModel) {
+            $productModel->product_qty += $product['quantity'];
+            $productModel->save();
+        }  
+    }
+
+    $notification = array(
+        'message' => 'Sale Return Updated Successfully',
+        'alert-type' => 'success'
+    ); 
+    return redirect()->route('all.sale.return')->with($notification);  
+}
+
+
+
+    // End Method
 }
