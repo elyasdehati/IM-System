@@ -134,6 +134,8 @@ Route::middleware('auth')->group(function () {
         Route::post('/store/sale/return', 'StoreSalesReturn')->name('store.sale.return');
         Route::get('/edit/sale/return/{id}', 'EditSalesReturn')->name('edit.sale.return');
         Route::post('/update/sale/return/{id}', 'UpdateSalesReturn')->name('update.sale.return');
+        Route::get('/details/sale/return/{id}', 'DetailsSalesReturn')->name('details.sale.return');
+        Route::get('/delete/sale/return/{id}', 'DeleteSalesReturn')->name('delete.sale.return');
     });
 
 });
