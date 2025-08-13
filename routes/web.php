@@ -141,6 +141,7 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(SaleReturnController::class)->group(function() {
         Route::get('/due/sale','DueSale')->name('due.sale');
+        Route::get('/due/sale/return', 'DueSaleReturn')->name('due.sale.return');
     });
 
 });

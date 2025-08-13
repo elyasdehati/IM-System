@@ -225,4 +225,14 @@ class SaleReturnController extends Controller
         return view('admin.backend.due.sale_due',compact('sales'));
     }
     // End Method
+
+    public function DueSaleReturn(){
+        $sales = SaleReturn::with(['customer','warehouse'])
+            ->select('id','customer_id','warehouse_id','due_amount')
+            ->where('due_amount', '>', 0)
+            ->get();
+        return view('admin.backend.due.sale_return_due',compact('sales'));
+
+    }
+    // End Method
 }

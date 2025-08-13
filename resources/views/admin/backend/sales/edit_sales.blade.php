@@ -169,7 +169,7 @@
                       </td>
                    </tr>
                    <!-- new add full paid functionality  -->
-                   <tr>
+                   <tr class="d-none">
                       <td class="py-3">Full Paid</td>
                       <td class="py-3" id="fullPaid"> 
                          <input type="text" class="form-control" name="full_paid" id="fullPaidInput" value="{{ $editData->full_paid }}"> 
@@ -384,37 +384,6 @@
 
   // set initial value
   updateDue();
-})();
-
-/////////////////   Full Paid Amount
-
-(function () {
-    const fullPaidInput = document.getElementById('fullPaidInput');
-    const dueTd = document.getElementById('dueAmount');
-    const dueHidden = document.querySelector('input[name="due_amount"]');
-
-    if (!fullPaidInput || !dueTd || !dueHidden) return;
-
-    const parseMoney = (txt) => {
-        const num = parseFloat(String(txt).replace(/[^0-9.\-]/g, ''));
-        return isNaN(num) ? 0 : num;
-    };
-
-    const currencyPrefix = dueTd.textContent.match(/^[^\d\-]*/)?.[0] || '';
-
-    function updateDue() {
-        const grandTotal = parseMoney(dueHidden.value) + parseMoney(fullPaidInput.value) || parseMoney(dueTd.textContent);
-        const fullPaid = parseMoney(fullPaidInput.value);
-        let due = parseMoney(dueHidden.value) - fullPaid;
-        if (due < 0) due = 0;
-        dueTd.textContent = `${currencyPrefix}${due.toFixed(2)}`;
-    }
-
-    ['input', 'change', 'keyup'].forEach(evt =>
-        fullPaidInput.addEventListener(evt, updateDue)
-    );
-
-    // **حالا مقدار اولیه Due Amount دیتابیس نمایش داده می‌شود، بدون تغییر**
 })();
 
     
