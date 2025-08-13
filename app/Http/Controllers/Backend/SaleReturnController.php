@@ -207,4 +207,12 @@ class SaleReturnController extends Controller
           }  
     }
     // End Method
+
+    public function InvoiceSalesReturn($id){
+        $sales = SaleReturn::with(['customer','warehouse','saleReturnItems.product'])->find($id);
+
+        $pdf = Pdf::loadView('admin.backend.return-sale.invoice_pdf',compact('sales'));
+        return $pdf->download('return_sales_'.$id.'.pdf');
+    }
+    // End Method
 }
