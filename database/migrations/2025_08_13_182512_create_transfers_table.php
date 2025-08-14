@@ -16,7 +16,6 @@ return new class extends Migration
             $table->date('date');
             $table->unsignedBigInteger('from_warehouse_id');
             $table->unsignedBigInteger('to_warehouse_id');
-            $table->unsignedBigInteger('customer_id');
             $table->decimal('discount',10,2)->default(0.00);
             $table->decimal('shipping',10,2)->default(0.00);
             $table->enum('status', ['Transfer', 'Pending', 'Ordered'])->default('Pending');
