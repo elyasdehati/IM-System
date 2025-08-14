@@ -149,6 +149,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/all/transfer','Transfer')->name('all.transfer');
         Route::get('/add/transfer','AddTransfer')->name('add.transfer');
         Route::post('/store/transfer','StoreTransfer')->name('store.transfer');
+        Route::get('/edit/transfer/{id}', 'EditTransfer')->name('edit.transfer');
+        Route::post('/update/transfer/{id}', 'UpdateTransfer')->name('update.transfer');
     });
 
 });
