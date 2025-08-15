@@ -159,6 +159,7 @@ Route::middleware('auth')->group(function () {
     Route::controller(ReportController::class)->group(function() {
         Route::get('/all/report','AllReport')->name('all.report');
         Route::get('/purchase/return/report', 'PurchaseReturnReport')->name('purchase.return.report');
+        Route::get('/sale/report','SaleReport')->name('sale.report');
         // Filter Purchase         Find the Data By Time and Date
         Route::get('/filter-purchases', 'FilterPurchases')->name('filter-purchases');
     });
