@@ -4,6 +4,7 @@
 <div class="page-content m-2">
     <div class="container">
         <div class="row">
+
 <div class="col-md-4 col-lg-4">
     <div class="card mb-3" style="max-width: 400px; background-color:aquamarine">
         <div class="row g-0">
@@ -21,6 +22,8 @@
         </div> 
     </div> 
 </div>
+
+
 <div class="col-md-4 col-lg-4">
     <div class="card mb-3" style="max-width: 400px; background-color:rgb(249, 201, 80)">
         <div class="row g-0">
@@ -38,6 +41,9 @@
         </div> 
     </div> 
 </div>
+
+
+
 <div class="col-md-4 col-lg-4">
     <div class="card mb-3" style="max-width: 400px; background-color:rgb(56, 245, 69)">
         <div class="row g-0">
@@ -55,6 +61,9 @@
         </div> 
     </div> 
 </div>
+
+
+
 <div class="col-md-4 col-lg-4">
     <div class="card mb-3" style="max-width: 400px; background-color:rgb(17, 152, 255)">
         <div class="row g-0">
@@ -72,6 +81,8 @@
         </div> 
     </div> 
 </div>
+
+
 <div class="col-md-4 col-lg-4">
     <div class="card mb-3" style="max-width: 400px; background-color:rgb(220, 52, 246)">
         <div class="row g-0">
@@ -89,12 +100,14 @@
         </div> 
     </div> 
 </div>
-        </div>
-    </div>
+ 
 
-              {{-- /// end Container  --}}
-              
+        </div> 
+    </div>
+     {{-- /// end Container  --}}
+
      <div class="card">
+
         <nav class="navbar navbar-expand-lg bg-dark">
             <div class="container-fluid">
                 <div class="collapse navbar-collapse" id="navbarNav">
@@ -105,15 +118,18 @@
         <li class="nav-item">
             <a href="" class="nav-link purchase-return-tab" >Purchase Return</a> 
         </li>
+
         <li class="nav-item">
             <a href="" class="nav-link" >Sale</a> 
         </li>
         <li class="nav-item">
             <a href="" class="nav-link" >Sale Return</a> 
         </li>
+
         <li class="nav-item">
             <a href="" class="nav-link" >Stock</a> 
         </li>
+
     </ul>     
 </div>
 
@@ -129,27 +145,81 @@
             <option value="last_month">Last Month</option>
             <option value="custom">Custom Range</option> 
         </select>
-        <span class="mdi mdi-filter-menu"></span> 
+        
     </div>
 
     {{-- // Custom date field  --}}
     <div class="dropdown-menu p-3 custom-dropdown position-absolute shadow bg-white">
         <label for="custom-start-date">Start Date:</label>
         <input type="date" id="custom-start-date" class="form-control mb-2">
+
         <label for="custom-end-date">End Date:</label>
         <input type="date" id="custom-end-date" class="form-control mb-2">
 
         <button id="apply-filter" class="btn btn-primary w-100">Apply</button> 
     </div> 
 </div>
+{{-- /// End Date rang filter  --}} 
 
-{{-- /// End Date rang filter  --}}
+
             </div> 
         </nav> 
-     </div>
-     {{-- /// End Card --}}
+
+    <div class="card-body">
+        <div class="table-responsive">
+            <div id="example_wrapper" class="dataTables_wrapper dt-bootstrap5">
+    <div class="row">
+        <div class="col-sm-12">
+            <table id="example" class="table table-striped table-bordered dataTable" style="width: 100%;" role="grid" aria-describedby="example_info">
+                <thead>
+                    <tr role="row">
+                        <th>ID</th>
+                        <th>Date</th>
+                        <th>Supplier</th>
+                        <th>Warehouse</th>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Unti Price</th>
+                        <th>Status</th>
+                        <th>Grand Total</th> 
+                    </tr>
+                </thead>
+            <tbody>
+            @foreach ($purchases as $key=> $purchase) 
+            @foreach ($purchase->purchaseItems as $item) 
+                <tr>
+                    <td>{{ $key+1 }}</td>
+                    <td>{{ $purchase->date }}</td>
+                    <td>{{ $purchase->supplier->name ?? 'N/A' }}</td>
+                    <td>{{ $purchase->warehouse->name ?? 'N/A' }}</td>
+                    <td>{{ $item->product->name ?? 'N/A'}}</td>
+                    <td>{{ $item->quantity ?? 'N/A'}}</td>
+                    <td>{{ $item->net_unit_cost ?? 'N/A'}}</td>
+                    <td>{{ $purchase->status ?? 'N/A' }}</td>
+                    <td>{{ $purchase->grand_total ?? 'N/A' }}</td> 
+                </tr>
+                @endforeach
+                @endforeach
+            </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
 
 </div>
 
+        </div>
+    </div>
+
+
+
+
+
+     </div>
+     {{-- /// End Card --}} 
+
+</div> 
 
 @endsection
