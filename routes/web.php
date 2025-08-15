@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SupplierController;
 use App\Http\Controllers\Backend\WareHouseController;
 use App\Http\Controllers\Backend\PurchaseController;
+use App\Http\Controllers\Backend\ReportController;
 use App\Http\Controllers\Backend\ReturnPurchaseController;
 use App\Http\Controllers\Backend\SaleController;
 use App\Http\Controllers\Backend\SaleReturnController;
@@ -153,6 +154,10 @@ Route::middleware('auth')->group(function () {
         Route::post('/update/transfer/{id}', 'UpdateTransfer')->name('update.transfer');
         Route::get('/delete/transfer/{id}', 'DeleteTransfer')->name('delete.transfer');
         Route::get('/details/transfer/{id}', 'DetailsTransfer')->name('details.transfer');
+    });
+
+    Route::controller(ReportController::class)->group(function() {
+        Route::get('/all/report','AllReport')->name('all.report');
     });
 
 });
