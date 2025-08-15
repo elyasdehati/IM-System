@@ -61,4 +61,10 @@ class ReportController extends Controller
         return response()->json(['sales' => $sales]);
     }
      // End Method 
+
+     public function SaleReturnReport(){
+        $returnSales = SaleReturn::with(['saleReturnItems.product','customer','warehouse'])->get();
+        return view('admin.backend.report.sales_return_report',compact('returnSales'));
+    }
+      // End Method
 }
