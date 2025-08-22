@@ -109,6 +109,12 @@
                 @endforeach
                 @endforeach
             </tbody>
+            <tfoot>
+                <tr>
+                    <td style="font-weight: 800; text-align: center; background-color: rgba(0, 0, 0, 0.2);" colspan="8" rowspan="1">Total</td>
+                    <td id="sales-total" style="font-weight: bold; background-color: rgba(0, 0, 0, 0.2);">{{ $saleReports->sum('grand_total') }}</td>
+                </tr>
+            </tfoot>
 
             </table>
 
@@ -273,32 +279,66 @@
         .catch(error => console.error('Error fetching data:', error));
     }
     
+    // function updateTable(sales) {
+    //     let tbody = document.querySelector("#example tbody");
+    //     tbody.innerHTML = ""; // Clear existing rows
+    
+    //     sales.forEach(sale => {
+    //         sale.sale_item.forEach(item => {
+    //             // Ensure net_unit_cost is a number, default to 0 if null/undefined
+    //             const netUnitCost = item.net_unit_cost ? parseFloat(item.net_unit_cost) : 0;
+    
+    //             let row = `
+    //                 <tr>
+    //                     <td>${sale.id}</td>
+    //                     <td>${sale.date}</td>
+    //                     <td>${sale.customer ? sale.customer.name : 'N/A'}</td>
+    //                     <td>${sale.warehouse ? sale.warehouse.name : 'N/A'}</td>
+    //                     <td>${item.product ? item.product.name : 'N/A'}</td>
+    //                     <td>${item.quantity}</td>
+    //                     <td>${netUnitCost.toFixed(2)}</td> <!-- Use the validated number -->
+    //                     <td>${sale.status}</td>
+    //                     <td>${sale.grand_total ? parseFloat(sale.grand_total).toFixed(2) : '0.00'}</td>
+    //                 </tr>
+    //             `;
+    //             tbody.insertAdjacentHTML('beforeend', row);
+    //         });
+    //     });
+    // }
+
     function updateTable(sales) {
-        let tbody = document.querySelector("#example tbody");
-        tbody.innerHTML = ""; // Clear existing rows
-    
-        sales.forEach(sale => {
-            sale.sale_item.forEach(item => {
-                // Ensure net_unit_cost is a number, default to 0 if null/undefined
-                const netUnitCost = item.net_unit_cost ? parseFloat(item.net_unit_cost) : 0;
-    
-                let row = `
-                    <tr>
-                        <td>${sale.id}</td>
-                        <td>${sale.date}</td>
-                        <td>${sale.customer ? sale.customer.name : 'N/A'}</td>
-                        <td>${sale.warehouse ? sale.warehouse.name : 'N/A'}</td>
-                        <td>${item.product ? item.product.name : 'N/A'}</td>
-                        <td>${item.quantity}</td>
-                        <td>${netUnitCost.toFixed(2)}</td> <!-- Use the validated number -->
-                        <td>${sale.status}</td>
-                        <td>${sale.grand_total ? parseFloat(sale.grand_total).toFixed(2) : '0.00'}</td>
-                    </tr>
-                `;
-                tbody.insertAdjacentHTML('beforeend', row);
-            });
+    let tbody = document.querySelector("#example tbody");
+    tbody.innerHTML = ""; // پاک کردن ردیف‌های قبلی
+    let total = 0;
+
+    sales.forEach(sale => {
+        sale.sale_item.forEach(item => {
+            const netUnitCost = item.net_unit_cost ? parseFloat(item.net_unit_cost) : 0;
+            const grandTotal = sale.grand_total ? parseFloat(sale.grand_total) : 0;
+
+            total += grandTotal;
+
+            let row = `
+                <tr>
+                    <td>${sale.id}</td>
+                    <td>${sale.date}</td>
+                    <td>${sale.customer ? sale.customer.name : 'N/A'}</td>
+                    <td>${sale.warehouse ? sale.warehouse.name : 'N/A'}</td>
+                    <td>${item.product ? item.product.name : 'N/A'}</td>
+                    <td>${item.quantity}</td>
+                    <td>${netUnitCost.toFixed(2)}</td>
+                    <td>${sale.status}</td>
+                    <td>${grandTotal.toFixed(2)}</td>
+                </tr>
+            `;
+            tbody.insertAdjacentHTML('beforeend', row);
         });
-    }
+    });
+
+    // همیشه مقدار Total را بروزرسانی کن
+    document.getElementById("sales-total").textContent = total.toFixed(2);
+}
+
     
     function formatDate(date) {
         return date.toISOString().split("T")[0];
