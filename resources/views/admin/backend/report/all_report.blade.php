@@ -31,8 +31,8 @@
         
     </div>
 
-    {{-- // Custom date field  --}}
-    <div class="dropdown-menu p-3 custom-dropdown position-absolute shadow bg-white">
+    {{-- // Custom date field  Without Close Button--}}
+    {{-- <div class="dropdown-menu p-3 custom-dropdown position-absolute shadow bg-white" >
         <label for="custom-start-date">Start Date:</label>
         <input type="date" id="custom-start-date" class="form-control mb-2">
 
@@ -40,9 +40,37 @@
         <input type="date" id="custom-end-date" class="form-control mb-2">
 
         <button id="apply-filter" class="btn btn-primary w-100">Apply</button> 
-    </div> 
-</div>
+    </div>  --}}
+
 {{-- /// End Date rang filter  --}} 
+
+
+
+{{-- // Custom date field  With Close btn--}}
+<div class="dropdown-menu p-3 custom-dropdown position-absolute shadow bg-white" id="calendar-dropdown">
+    <div class="d-flex justify-content-between align-items-center mb-2">
+        <h6 class="mb-0">Select Date</h6>
+        <button type="button" class="btn-close" id="close-calendar"></button>
+    </div>
+
+    <label for="custom-start-date">Start Date:</label>
+    <input type="date" id="custom-start-date" class="form-control mb-2">
+
+    <label for="custom-end-date">End Date:</label>
+    <input type="date" id="custom-end-date" class="form-control mb-2">
+
+    <button id="apply-filter" class="btn btn-primary w-100">Apply</button>
+</div>
+
+</div>
+
+<script>
+    document.getElementById('close-calendar').addEventListener('click', function () {
+        document.getElementById('calendar-dropdown').style.display = 'none';
+    });
+</script>
+{{-- /// End Date range filter  --}}
+
 
 
             </div> 
@@ -253,7 +281,7 @@
         tbody.innerHTML = ""; // Clear existing rows
     
         purchases.forEach(purchase => {
-            purchase.purchase_items.forEach(item => {
+            purchase.purchase_item.forEach(item => {
                 // Ensure net_unit_cost is a number, default to 0 if null/undefined
                 const netUnitCost = item.net_unit_cost ? parseFloat(item.net_unit_cost) : 0;
     

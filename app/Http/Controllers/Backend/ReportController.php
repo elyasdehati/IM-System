@@ -23,7 +23,7 @@ class ReportController extends Controller
     public function FilterPurchases(Request $request){
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
-        $query = Purchase::with(['purchaseItems.product','supplier','warehouse']);
+        $query = Purchase::with(['purchaseItem.product','supplier','warehouse']);
 
         if ($startDate && $endDate ) {
             $startDate = Carbon::parse($startDate)->startOfDay();
