@@ -3,6 +3,12 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
+<style>
+    .form-check-label{
+        text-transform: capitalize;
+    }
+</style>
+
 <div class="content">
 
                     <!-- Start Content-->
@@ -44,8 +50,8 @@
                 </div>
 
                 <div class="form-check mb-2">
-                    <input type="checkbox" class="form-check-input" id="flexCheckDefault">
-                    <label for="flexCheckDefault" class="form-check-label">Permission All</label>
+                    <input type="checkbox" class="form-check-input" id="formCheck1">
+                    <label for="formCheck1" class="form-check-label">Permission All</label>
                 </div><hr>
 
                 @foreach ($permission_group as $group)
@@ -89,5 +95,15 @@
                     </div> <!-- container-fluid -->
 
                 </div>
+
+<script>
+    $('#formCheck1').click(function(){
+        if($(this).is(':checked')){
+            $('input[type=checkbox]').prop('checked', true)
+        }else{
+            $('input[type=checkbox]').prop('checked', false)
+        }
+    })
+</script>
 
 @endsection
