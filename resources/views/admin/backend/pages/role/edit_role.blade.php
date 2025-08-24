@@ -10,13 +10,13 @@
 
                         <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
                             <div class="flex-grow-1">
-                                <h4 class="fs-18 fw-semibold m-0">Add Permission</h4>
+                                <h4 class="fs-18 fw-semibold m-0">Edit Role</h4>
                             </div>
             
                             <div class="text-end">
                                 <ol class="breadcrumb m-0 py-0">
                                    
-                                    <li class="breadcrumb-item active">Add Permission</li>
+                                    <li class="breadcrumb-item active">Edit Role</li>
                                 </ol>
                             </div>
                         </div>
@@ -26,34 +26,19 @@
                             <div class="col-xl-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h5 class="card-title mb-0">Add Permission</h5>
+                                        <h5 class="card-title mb-0">Edit Roles</h5>
                                     </div><!-- end card header -->
         
         <div class="card-body">
-            <form action="{{ route('store.permission') }}" method="post" class="row g-3" enctype="multipart/form-data">
+            <form action="{{ route('update.roles') }}" method="post" class="row g-3" enctype="multipart/form-data">
                 @csrf
 
-                <div class="col-md-6">
-                    <label for="validationDefault01" class="form-label">Permission Name</label>
-                    <input type="text" class="form-control" name="name">
-                   
-                </div>
+                <input type="hidden" name="id" value="{{ $roles->id }}">
 
                 <div class="col-md-6">
-                    <label for="validationDefault01" class="form-label">Permission Group</label>
-                    <select name="group_name" id="example-select" class="form-select">
-                        <option value="" selected>Select Group</option>
-                        <option value="Brand">Brand</option>
-                        <option value="WareHouse">WareHouse</option>
-                        <option value="Supplier">Supplier</option>
-                        <option value="Customer">Customer</option>
-                        <option value="Product">Product</option>
-                        <option value="Purchase">Purchase</option>
-                        <option value="Sale">Sale</option>
-                        <option value="Due">Due</option>
-                        <option value="Transfer">Transfer</option>
-                        <option value="Report">Report</option>
-                    </select>
+                    <label for="validationDefault01" class="form-label">Roles Name</label>
+                    <input type="text" class="form-control" name="name" value="{{ $roles->name }}">
+                   
                 </div>
 
                 <div class="col-12">
