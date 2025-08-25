@@ -189,8 +189,9 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::controller(RoleController::class)->group(function() {
-        Route::get('/all/roles/permission','AddRolesPermission')->name('add.roles.permission');
+        Route::get('/add/roles/permission','AddRolesPermission')->name('add.roles.permission');
         Route::post('/role/permission/store','RolePermissionStore')->name('role.permission.store');
+        Route::get('/all/roles/permission','AllRolesPermission')->name('all.roles.permission');
     });
 
 });
