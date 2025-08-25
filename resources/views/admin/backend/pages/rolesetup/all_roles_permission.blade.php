@@ -41,15 +41,15 @@
                         @foreach ($roles as $key=> $item)
                             <tr>
                                 <td>{{ $key+1 }}</td>
-                                <td>{{ $item->name }}</td>
+                                <td style="width: 120px;">{{ $item->name }}</td>
                                 <td>
                                     @foreach ($item->permissions as $prem)
                                         <span class="badge bg-danger">{{ $prem->name }}</span>
                                     @endforeach
                                 </td>
-                                <td>
+                                <td style="width: 120px;">
                                     <a href="{{ route('admin.edit.roles', $item->id) }}" class="btn btn-success btn-sm">Edit</a>
-                                    <a href="{{ route('delete.warehouse', $item->id) }}" id="delete" class="btn btn-danger btn-sm">Delete</a>
+                                    <a href="{{ route('admin.delete.roles', $item->id) }}" id="delete" class="btn btn-danger btn-sm">Delete</a>
                                 </td>
                             </tr>
                         @endforeach
