@@ -36,6 +36,7 @@
 
                             <li class="menu-title">Pages</li>
 
+                        @if (Auth::guard('web')->user()->can('brand.menu'))
                             <li>
                                 <a href="#sidebarAuth" data-bs-toggle="collapse">
                                     <i data-feather="users"></i>
@@ -44,14 +45,18 @@
                                 </a>
                                 <div class="collapse" id="sidebarAuth">
                                     <ul class="nav-second-level">
-                                        <li>
-                                            <a href="{{ route('all.brand') }}" class="tp-link">All brand</a>
-                                        </li>
+                                        @if (Auth::guard('web')->user()->can('all.brand'))
+                                            <li>
+                                                <a href="{{ route('all.brand') }}" class="tp-link">All brand</a>
+                                            </li>
+                                        @endif
                                     </ul>
                                 </div>
                             </li>
+                        @endif
 
-                             <li>
+                        @if (Auth::guard('web')->user()->can('warehouse.menu'))
+                            <li>
                                 <a href="#warehouse" data-bs-toggle="collapse">
                                     <i data-feather="users"></i>
                                     <span> WareHouse Manage </span>
@@ -59,12 +64,15 @@
                                 </a>
                                 <div class="collapse" id="warehouse">
                                     <ul class="nav-second-level">
-                                        <li>
-                                            <a href="{{ route('all.warehouse') }}" class="tp-link">All Warehouse</a>
-                                        </li>
+                                        @if (Auth::guard('web')->user()->can('all.warehouse'))
+                                            <li>
+                                                <a href="{{ route('all.warehouse') }}" class="tp-link">All Warehouse</a>
+                                            </li>
+                                        @endif
                                     </ul>
                                 </div>
                             </li>
+                        @endif
 
                             <li>
                                 <a href="#supplier" data-bs-toggle="collapse">
