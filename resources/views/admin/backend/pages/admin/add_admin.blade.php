@@ -30,7 +30,7 @@
                                     </div><!-- end card header -->
         
         <div class="card-body">
-            <form action="{{ route('store.warehouse') }}" method="post" class="row g-3" enctype="multipart/form-data">
+            <form action="{{ route('store.admin') }}" method="post" class="row g-3" enctype="multipart/form-data">
                 @csrf
 
                 <div class="col-md-6">
