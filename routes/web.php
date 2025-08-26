@@ -197,4 +197,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/admin/delete/roles/{id}','AdminDeleteRoles')->name('admin.delete.roles');
     });
 
+    Route::controller(RoleController::class)->group(function() {
+        Route::get('/all/admin','AllAdmin')->name('all.admin');
+        Route::get('/add/admin','AddAdmin')->name('add.admin');
+    });
+
 });
