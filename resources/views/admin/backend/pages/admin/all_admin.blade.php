@@ -50,8 +50,8 @@
                                     @endforeach
                                 </td>
                                 <td>
-                                    <a href="{{ route('edit.warehouse', $item->id) }}" class="btn btn-success btn-sm">Edit</a>
-                                    <a href="{{ route('delete.warehouse', $item->id) }}" id="delete" class="btn btn-danger btn-sm">Delete</a>
+                                    <a href="{{ route('edit.admin', $item->id) }}" class="btn btn-success btn-sm">Edit</a>
+                                    <a href="{{ route('delete.admin', $item->id) }}" id="delete" class="btn btn-danger btn-sm">Delete</a>
                                 </td>
                             </tr>
                         @endforeach
